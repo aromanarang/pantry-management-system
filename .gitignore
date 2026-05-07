@@ -1,4 +1,7 @@
 venv/
+sample_*
+grocerysample*
+samplegrocerybill*
 backend/.env
 frontend/node_modules
 frontend/dist
