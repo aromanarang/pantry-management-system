@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 
 import cv2
 import pandas as pd
@@ -9,14 +10,16 @@ import pytesseract
 def _resolve_tesseract_path():
     candidates = [
         os.getenv("TESSERACT_PATH"),
-        r"C:\Users\aroma\AppData\Local\Programs\Tesseract-OCR\tesseract.exe",
+        shutil.which("tesseract"),
+        r"C:\Program Files\Tesseract-OCR\tesseract.exe",
+        r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe",
     ]
 
     for candidate in candidates:
         if candidate and os.path.exists(candidate):
             return candidate
 
-    return candidates[1]
+    return "tesseract"
 
 
 pytesseract.pytesseract.tesseract_cmd = _resolve_tesseract_path()
